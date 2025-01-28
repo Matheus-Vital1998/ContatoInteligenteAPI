@@ -5,6 +5,10 @@ Este repositório contém uma API intermediária que acessa a API pública do Gi
 ### Desafio Técnico
 O objetivo do desafio é criar uma API intermediária que forneça informações sobre os repositórios de linguagem **C#** mais antigos da organização **Takenet** no GitHub. A API também deve retornar o avatar da organização **Blip** para ser usado no chatbot.
 
+
+### Url Api publicada
+https://repository-github.azurewebsites.net/swagger/index.html
+
 ---
 
 ## Funcionalidades
