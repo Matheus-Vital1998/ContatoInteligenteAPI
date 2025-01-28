@@ -59,6 +59,10 @@ jobs:
         with:
           name: .net-app
 
+      # Verificar conteúdo da pasta publish (para depuração)
+      - name: List publish folder
+        run: ls -R ${{ github.workspace }}/publish
+
       # Fazer login no Azure
       - name: Login to Azure
         uses: azure/login@v2
@@ -74,7 +78,7 @@ jobs:
         with:
           app-name: 'repository-github'  # Certifique-se de que o nome do app está correto
           slot-name: 'Production'
-          package: ${{ github.workspace }}/publish  # Ajuste aqui o caminho correto
+          package: ${{ github.workspace }}/publish  # Caminho correto da pasta publish
 
       # Listar arquivos publicados (para debug)
       - name: List published files
