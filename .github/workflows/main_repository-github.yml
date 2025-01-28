@@ -10,25 +10,31 @@ jobs:
   build:
     runs-on: windows-latest
     permissions:
-      contents: read
+      contents: read # Necessário para o checkout do repositório
 
     steps:
+      # Checkout do repositório
       - uses: actions/checkout@v4
 
+      # Configurar o .NET Core
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
 
+      # Restaurar dependências
       - name: Restore dependencies with dotnet
         run: dotnet restore
 
+      # Construir a aplicação
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
+      # Publicar a aplicação
       - name: Publish with dotnet
-        run: dotnet publish ContatoInteligenteAPI/ContatoInteligenteAPI.csproj -c Release -o ${{ github.workspace }}/publish
+        run: dotnet publish -c Release -o ${{ github.workspace }}/publish
 
+      # Fazer upload dos artefatos para a etapa de deploy
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
@@ -42,18 +48,22 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write
-      contents: read
+      id-token: write # Necessário para solicitar o JWT
+      contents: read # Necessário para o checkout do repositório
 
     steps:
+      # Baixar os artefatos da etapa de build
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: .net-app
+          path: ${{ github.workspace }}/publish
 
+      # Listar arquivos baixados (para debug)
       - name: List downloaded files
         run: Get-ChildItem -Recurse ${{ github.workspace }}
 
+      # Fazer login no Azure
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -61,13 +71,15 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_656FA78D1CEC483F90AD52E099756CFD }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E3FC754F46094A46931E59916BE4CEAC }}
 
+      # Fazer deploy no Azure Web App
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'repository-github'
+          app-name: 'repository-github'  # Certifique-se de que o nome do app está correto
           slot-name: 'Production'
-          package: ${{ github.workspace }}/publish
+          package: ${{ github.workspace }}/publish  # Certifique-se de que o caminho está correto
 
+      # Listar arquivos publicados (para debug)
       - name: List published files
         run: Get-ChildItem -Recurse ${{ github.workspace }}/publish
