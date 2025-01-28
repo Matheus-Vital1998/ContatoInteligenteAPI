@@ -1,0 +1,22 @@
+[
+  {
+    "ContainingType": "ContatoInteligenteAPI.Controllers.GitHubController",
+    "Method": "GetAvatar",
+    "RelativePath": "api/GitHub/avatar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContatoInteligenteAPI.Controllers.GitHubController",
+    "Method": "GetTop5Repositories",
+    "RelativePath": "api/GitHub/repositories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

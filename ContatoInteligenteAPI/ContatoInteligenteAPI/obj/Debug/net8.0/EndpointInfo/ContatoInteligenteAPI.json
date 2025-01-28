@@ -1,0 +1,44 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "GitHub API - Blip Challenge",
+    "description": "API intermediária para acessar a API pública do GitHub, criada como parte do desafio técnico. Esta API fornece informações sobre os repositórios da organização Takenet, incluindo avatar e detalhes específicos.",
+    "contact": {
+      "name": "Matheus Vital dos Santos de Oliveira",
+      "url": "https://github.com/Matheus-Vital1998?tab=repositories",
+      "email": "mat_vital@yahoo.com.br"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/api/GitHub/avatar": {
+      "get": {
+        "tags": [
+          "GitHub"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/GitHub/repositories": {
+      "get": {
+        "tags": [
+          "GitHub"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": { }
+}
