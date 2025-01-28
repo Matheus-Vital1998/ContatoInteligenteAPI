@@ -73,8 +73,8 @@ jobs:
         with:
           app-name: 'repository-github'  # Certifique-se de que o nome do app está correto
           slot-name: 'Production'
-          package: ${{ github.workspace }}/publish  # Certifique-se de que o caminho está correto
+          package: ${{ github.workspace }}/.net-app  # Use o nome do artefato baixado
 
       # Listar arquivos publicados (para debug)
       - name: List published files
-        run: ls -R ${{ github.workspace }}/publish
+        run: ls -R ${{ github.workspace }}/.net-app
