@@ -58,6 +58,10 @@ jobs:
         with:
           name: .net-app
 
+      # Listar arquivos baixados (para debug)
+      - name: List downloaded files
+        run: dir ${{ github.workspace }} /b /s
+
       # Fazer login no Azure
       - name: Login to Azure
         uses: azure/login@v2
@@ -73,8 +77,8 @@ jobs:
         with:
           app-name: 'repository-github'  # Certifique-se de que o nome do app está correto
           slot-name: 'Production'
-          package: ${{ runner.workspace }}/.net-app  # Ajuste para usar runner.workspace
+          package: ${{ github.workspace }}/publish  # Use o caminho para o diretório publish
 
       # Listar arquivos publicados (para debug)
       - name: List published files
-        run: ls -R ${{ runner.workspace }}/.net-app
+        run: dir ${{ github.workspace }}/publish /b /s
