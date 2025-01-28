@@ -60,7 +60,7 @@ jobs:
 
       # Listar arquivos baixados (para debug)
       - name: List downloaded files
-        run: dir ${{ github.workspace }} /b /s
+        run: Get-ChildItem -Recurse ${{ github.workspace }}
 
       # Fazer login no Azure
       - name: Login to Azure
@@ -81,4 +81,4 @@ jobs:
 
       # Listar arquivos publicados (para debug)
       - name: List published files
-        run: dir ${{ github.workspace }}/publish /b /s
+        run: Get-ChildItem -Recurse ${{ github.workspace }}/publish
