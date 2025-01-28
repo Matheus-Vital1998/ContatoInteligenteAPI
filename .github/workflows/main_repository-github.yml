@@ -58,6 +58,11 @@ jobs:
         with:
           name: .net-app
 
+      # Definir caminho do pacote
+      - name: Set package path
+        id: set-package-path
+        run: echo "##[set-output name=PACKAGE_PATH;]${{ github.workspace }}/.net-app"
+
       # Listar arquivos baixados (para debug)
       - name: List downloaded files
         run: Get-ChildItem -Recurse ${{ github.workspace }}
@@ -77,8 +82,8 @@ jobs:
         with:
           app-name: 'repository-github'  # Certifique-se de que o nome do app está correto
           slot-name: 'Production'
-          package: ${{ github.workspace }}/publish  # Use o caminho para o diretório publish
+          package: ${{ steps.set-package-path.outputs.PACKAGE_PATH }}  # Use o caminho definido
 
       # Listar arquivos publicados (para debug)
       - name: List published files
-        run: Get-ChildItem -Recurse ${{ github.workspace }}/publish
+        run: Get-ChildItem -Recurse ${{ steps.set-package-path.outputs.PACKAGE_PATH }}
