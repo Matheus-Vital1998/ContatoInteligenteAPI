@@ -35,6 +35,10 @@ jobs:
       - name: Publish with dotnet
         run: dotnet publish -c Release -o ${{ github.workspace }}/publish
 
+      # Listar os arquivos gerados pela publicação (para depuração)
+      - name: List publish folder
+        run: ls -R ${{ github.workspace }}/publish
+
       # Fazer upload dos artefatos para a etapa de deploy
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -59,9 +63,9 @@ jobs:
         with:
           name: .net-app
 
-      # Verificar conteúdo da pasta publish (para depuração)
-      - name: List publish folder
-        run: ls -R ${{ github.workspace }}/publish
+      # Verificar conteúdo da pasta download (para depuração)
+      - name: List downloaded folder
+        run: ls -R ${{ github.workspace }}/.net-app
 
       # Fazer login no Azure
       - name: Login to Azure
@@ -78,7 +82,7 @@ jobs:
         with:
           app-name: 'repository-github'  # Certifique-se de que o nome do app está correto
           slot-name: 'Production'
-          package: ${{ github.workspace }}/publish  # Caminho correto da pasta publish
+          package: ${{ github.workspace }}/publish  # Ajuste o caminho para o diretório correto
 
       # Listar arquivos publicados (para debug)
       - name: List published files
