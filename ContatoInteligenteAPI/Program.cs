@@ -17,7 +17,7 @@ builder.Services.AddSwaggerGen(options =>
     {
         Version = "v1",
         Title = "GitHub API - Blip Challenge",
-        Description = "API intermediária para acessar a API pública do GitHub, criada como parte do desafio técnico. Esta API fornece informações sobre os repositórios da organização Takenet, incluindo avatar e detalhes específicos.",
+        Description = "API intermediÃ¡ria para acessar a API pÃºblica do GitHub, criada como parte do desafio tÃ©cnico. Esta API fornece informaÃ§Ãµes sobre os repositÃ³rios da organizaÃ§Ã£o Takenet, incluindo avatar e detalhes especÃ­ficos.",
         Contact = new OpenApiContact
         {
             Name = "Matheus Vital dos Santos de Oliveira",
@@ -33,7 +33,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 
-// Adiciona serviços
+// Adiciona serviÃ§os
 builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<IGitHubRepository, GitHubRepository>();
 builder.Services.AddScoped<IGitHubRepository, GitHubRepository>();
@@ -41,12 +41,9 @@ builder.Services.AddScoped<IGitHubService, GitHubService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
